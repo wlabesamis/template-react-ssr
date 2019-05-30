@@ -37,10 +37,13 @@
     "core-js": "^3.0.1",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
+    "react-router-dom": "^5.0.0",
     "react-universal-component": "^4.0.0",
+    "serialize-javascript": "^1.7.0",
     "webpack-flush-chunks": "^2.0.3",
     "winston": "^3.2.1"
   },

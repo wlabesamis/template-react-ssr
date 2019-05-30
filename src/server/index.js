@@ -1,8 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
+import { StaticRouter } from 'react-router-dom';
+
+import Routes from '../shared/routes';
+
 
 import createDocument from './document';
 import App from '../shared/App';
@@ -16,11 +20,13 @@ import App from '../shared/App';
  * @param clientStats Parameter passed by hot server middleware
  */
 export default ({ clientStats }) => async (req, res) => {
-    const app = (
-        <App/>
-    );
+    const context = {};
 
-    const appString = ReactDOM.renderToString(app);
+    const appString = renderToString(
+        <StaticRouter location={req.url} context={context} >
+            <App />
+        </StaticRouter>
+    );
     const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
     const { js, styles } = flushChunks(clientStats, { chunkNames });
@@ -30,6 +36,10 @@ export default ({ clientStats }) => async (req, res) => {
         styles,
         helmet,
     });
+
+    if (context.status === 404) {
+        res.status(404);
+    }
 
     res.set('Content-Type', 'text/html').end(document);
 };

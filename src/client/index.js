@@ -1,5 +1,6 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import { BrowserRouter } from "react-router-dom";
 
 import App from '../shared/App';
 
@@ -10,9 +11,11 @@ import App from '../shared/App';
  *
  * @param Component React component that should be rendered
  */
-const render = (Component) => {
+const render = Component => {
     hydrate(
-        <Component/>,
+        <BrowserRouter>
+            <Component/>
+        </BrowserRouter>,
         document.getElementById('react-root'),
     );
 };
