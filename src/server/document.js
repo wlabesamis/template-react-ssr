@@ -1,8 +1,11 @@
+import serialize from 'serialize-javascript';
+
 export default ({
     appString,
     js,
     styles,
     helmet,
+    routeData
 }) => `
     <!doctype html>
     <html>
@@ -20,7 +23,8 @@ export default ({
       <div id="react-root">${appString}</div>
       
       ${js}
-      
+    <script>window.__ROUTE_DATA__ = ${serialize(routeData)}</script>  
     </body>
+    
     </html>
 `;

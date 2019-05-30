@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, NavLink } from 'react-router-dom';
 
-//import Helmet from 'react-helmet';
+import Helmet from 'react-helmet';
 import './app.styl';
 
 
 //In-house compoentn
 import NoMatch from './components/NoMatch';
 import Home from './components/Home';
+import Todos from './components/Todos';
+import Posts from './components/Posts';
 
 
 //import UniversalComponent from './components/UniversalComponent';
@@ -21,24 +23,34 @@ import Home from './components/Home';
 export default class App extends Component {
     render() {
         return (
-            <Switch>
-                <Route
-                    exact
-                    path="/"
-                    render={props => <Home {...props} />}
-                />
-                <Route component={NoMatch} />
-            </Switch>
-
-
-            /*<div>
+            <div>
                 <Helmet>
                     <title>App Component | React Universal</title>
                 </Helmet>
 
-                <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="getting-started" />
-            </div>*/
+                <ul>
+                    <li>
+                        <NavLink to="/">Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/todos">Todos</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/posts">Posts</NavLink>
+                    </li>
+                </ul>
+
+                <Switch>
+                    <Route
+                        exact
+                        path="/"
+                        render={props => <Home name="Alligator.io" {...props} />}
+                    />
+                    <Route path="/todos" component={Todos} />
+                    <Route path="/posts" component={Posts} />
+                    <Route component={NoMatch} />
+                </Switch>
+            </div>
         );
     }
 }

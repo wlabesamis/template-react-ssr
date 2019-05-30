@@ -20,9 +20,6 @@ const Routes = [
         path: '/todos',
         component: Todos,
         loadData: () => loadData('todos')
-    },
-    {
-        component: NoMatch
     }
 ];
 
