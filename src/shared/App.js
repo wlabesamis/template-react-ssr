@@ -46,8 +46,16 @@ export default class App extends Component {
                         path="/"
                         render={props => <Home name="Alligator.io" {...props} />}
                     />
-                    <Route path="/todos" component={Todos} />
-                    <Route path="/posts" component={Posts} />
+                    <Route
+                        exact
+                        path="/todos"
+                        render={props => <Todos {...props} /> }
+                    />
+                    <Route
+                        exact
+                        path="/posts"
+                        render={props => <Posts {...props} /> }
+                    />
                     <Route component={NoMatch} />
                 </Switch>
             </div>

@@ -28,9 +28,9 @@ export default ({ clientStats }) => async (req, res) => {
         promise = currentRoute.loadData();
     }
 
-    promise.then(routeData => {
+    promise.then(data => {
         // Let's add the data to the context
-        const context = { routeData };
+        const context = { data };
 
         const appString = renderToString(
             <StaticRouter location={req.url} context={context} >
@@ -45,7 +45,7 @@ export default ({ clientStats }) => async (req, res) => {
             js,
             styles,
             helmet,
-            routeData
+            data
         });
 
         if (context.status === 404) {
