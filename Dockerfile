@@ -1,18 +1,16 @@
 FROM node:10-alpine AS builder
 
+#declaration of ARG
+ARG WORKDIR
+
 #workdir
-WORKDIR ${WORKDIR}
+WORKDIR $WORKDIR
+
 #Install Software
 RUN apk add git openssh-client
 
 # Make ssh dir
 RUN mkdir /root/.ssh/
-
-# Copy over private key, and set permissions
-# Warning! Anyone who gets their hands on this image will be able
-# to retrieve this private key file from the corresponding image layer
-ADD ./build/id_rsa /root/.ssh/id_rsa
-RUN chmod 600 /root/.ssh/id_rsa
 
 # Create known_hosts
 RUN touch /root/.ssh/known_hosts
@@ -20,14 +18,17 @@ RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan githumb.com >> /root/.ssh/known_hosts
 
 # Clone the conf files into the docker container
-RUN git clone https://github.com/wlabesamis/template-react-ssr.git $WORKDIR/react-ssr
+RUN git clone --branch feature-my-first-react-ssr https://github.com/wlabesamis/template-react-ssr.git $WORKDIR/react-ssr
 
 
 #creating development instance
 FROM node:10-alpine
 
 #declaration of ARG
-WORKDIR ${WORKDIR}
+ARG WORKDIR
+
+#workdir
+WORKDIR $WORKDIR
 
 #Update the OS
 RUN apk add --update alpine-sdk

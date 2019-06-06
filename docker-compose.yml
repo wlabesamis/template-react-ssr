@@ -7,7 +7,7 @@ services:
       args:
         WORKDIR: ${WORKDIR}
     ports:
-      - "3500:3500"
+      - "3000:3000"
     env_file:
       - .env
     restart: on-failure
