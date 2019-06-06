@@ -27,15 +27,15 @@ FROM node:10-alpine
 #declaration of ARG
 ARG WORKDIR
 
-#workdir
-WORKDIR $WORKDIR
-
 #Update the OS
 RUN apk add --update alpine-sdk
 
 COPY --from=builder $WORKDIR/react-ssr $WORKDIR/react-ssr
 
+#workdir
+WORKDIR $WORKDIR/react-ssr
+
 #Install Software
-RUN cd $WORKDIR/react-ssr && npm install -g
+RUN npm install
 
 ENTRYPOINT ["npm", "start"]
