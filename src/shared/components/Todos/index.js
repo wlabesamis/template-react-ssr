@@ -2,24 +2,6 @@ import React, { Component } from 'react';
 import loadData from '../../helpers/loadData'
 
 
-
-/*const Todos = (props) => {
-    return (
-        <ul>sdf
-        {props.staticContext && props.staticContext.data &&
-            props.staticContext.data.map(todo => {
-                return (
-                    <li key={todo.id}>{todo.title}</li>
-                );
-            })
-        }
-        </ul>
-
-    )
-
-}*/
-
-
 class Todos extends Component {
     constructor(props) {
         super(props);

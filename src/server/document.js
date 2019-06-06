@@ -5,7 +5,7 @@ export default ({
     js,
     styles,
     helmet,
-    routeData
+    data
 }) => `
     <!doctype html>
     <html>
@@ -17,13 +17,14 @@ export default ({
         ${styles}
         
         ${helmet.title.toString()}
+        ${helmet.link.toString()}
     </head>
     <body>
     
       <div id="react-root">${appString}</div>
       
       ${js}
-    <script>window.__ROUTE_DATA__ = ${serialize(routeData)}</script>  
+    <script>window.__ROUTE_DATA__ = ${serialize(data)}</script>  
     </body>
     
     </html>

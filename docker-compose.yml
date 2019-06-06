@@ -1,0 +1,13 @@
+version: '3'
+services:
+  react-ssr:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+      args:
+        WORKDIR: ${WORKDIR}
+    ports:
+      - "3500:3500"
+    env_file:
+      - .env
+    restart: on-failure
